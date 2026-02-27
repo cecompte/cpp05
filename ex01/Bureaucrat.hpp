@@ -6,13 +6,15 @@
 /*   By: cecompte <cecompte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 15:58:49 by cecompte          #+#    #+#             */
-/*   Updated: 2026/02/27 17:00:28 by cecompte         ###   ########.fr       */
+/*   Updated: 2026/02/27 17:50:09 by cecompte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 # include <iostream>
+
+class Form;
 
 class Bureaucrat
 {
@@ -28,6 +30,7 @@ class Bureaucrat
         int getGrade() const;
         void incrementGrade();
         void decrementGrade();
+        void signForm(Form& form);
         class GradeTooHighException : public std::exception
         {
             public:

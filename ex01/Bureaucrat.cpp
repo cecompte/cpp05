@@ -6,11 +6,12 @@
 /*   By: cecompte <cecompte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 15:58:44 by cecompte          #+#    #+#             */
-/*   Updated: 2026/02/27 17:55:47 by cecompte         ###   ########.fr       */
+/*   Updated: 2026/02/27 18:15:57 by cecompte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 // Default constructor
 Bureaucrat::Bureaucrat(void) : _name("Default name"), _grade(1)
@@ -23,9 +24,9 @@ Bureaucrat::Bureaucrat(void) : _name("Default name"), _grade(1)
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
     if (grade < 1)
-        throw GradeTooHighException();
+        throw (Bureaucrat::GradeTooHighException());
     else if (grade > 150)
-        throw GradeTooLowException();
+        throw (Bureaucrat::GradeTooLowException());
     else
         this->_grade = grade;
     std::cout << "Bureaucrat parametized constructor called\n";
@@ -81,6 +82,19 @@ void Bureaucrat::decrementGrade()
         throw (Bureaucrat::GradeTooLowException());
     else
         this->_grade = _grade + 1;
+}
+
+void Bureaucrat::signForm(Form& form)
+{
+    try 
+    { 
+        form.beSigned(*this);
+        std::cout << _name << " signed " << form.getName() << ".\n";
+    }
+    catch (std::exception &e)
+    {
+        std::cout << _name << " couldn't sign " << form.getName() << " because their " << e.what() << ".\n";
+    }  
 }
 
 // Insertion operator overload
